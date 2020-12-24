@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzxy.labmanage.dao.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.hzxy.labmanage.model.Student">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="ssex" jdbcType="VARCHAR" property="ssex" />
+    <result column="sbirthday" jdbcType="DATE" property="sbirthday" />
+    <result column="sclass" jdbcType="VARCHAR" property="sclass" />
+    <result column="sdep" jdbcType="VARCHAR" property="sdep" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, sname, ssex, sbirthday, sclass, sdep
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from student
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hzxy.labmanage.model.Student">
+    insert into student (id, uid, sname, 
+      ssex, sbirthday, sclass, 
+      sdep)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, 
+      #{ssex,jdbcType=VARCHAR}, #{sbirthday,jdbcType=DATE}, #{sclass,jdbcType=VARCHAR}, 
+      #{sdep,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzxy.labmanage.model.Student">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="sname != null">
+        sname,
+      </if>
+      <if test="ssex != null">
+        ssex,
+      </if>
+      <if test="sbirthday != null">
+        sbirthday,
+      </if>
+      <if test="sclass != null">
+        sclass,
+      </if>
+      <if test="sdep != null">
+        sdep,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null">
+        #{ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="sbirthday != null">
+        #{sbirthday,jdbcType=DATE},
+      </if>
+      <if test="sclass != null">
+        #{sclass,jdbcType=VARCHAR},
+      </if>
+      <if test="sdep != null">
+        #{sdep,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzxy.labmanage.model.Student">
+    update student
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null">
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null">
+        ssex = #{ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="sbirthday != null">
+        sbirthday = #{sbirthday,jdbcType=DATE},
+      </if>
+      <if test="sclass != null">
+        sclass = #{sclass,jdbcType=VARCHAR},
+      </if>
+      <if test="sdep != null">
+        sdep = #{sdep,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzxy.labmanage.model.Student">
+    update student
+    set uid = #{uid,jdbcType=VARCHAR},
+      sname = #{sname,jdbcType=VARCHAR},
+      ssex = #{ssex,jdbcType=VARCHAR},
+      sbirthday = #{sbirthday,jdbcType=DATE},
+      sclass = #{sclass,jdbcType=VARCHAR},
+      sdep = #{sdep,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

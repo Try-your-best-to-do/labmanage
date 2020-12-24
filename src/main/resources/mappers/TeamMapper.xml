@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzxy.labmanage.dao.TeamMapper">
+  <resultMap id="BaseResultMap" type="com.hzxy.labmanage.model.Team">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tid" jdbcType="VARCHAR" property="tid" />
+    <result column="ttype" jdbcType="VARCHAR" property="ttype" />
+    <result column="tname" jdbcType="VARCHAR" property="tname" />
+    <result column="tdate" jdbcType="DATE" property="tdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tid, ttype, tname, tdate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from team
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from team
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hzxy.labmanage.model.Team">
+    insert into team (id, tid, ttype, 
+      tname, tdate)
+    values (#{id,jdbcType=INTEGER}, #{tid,jdbcType=VARCHAR}, #{ttype,jdbcType=VARCHAR}, 
+      #{tname,jdbcType=VARCHAR}, #{tdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzxy.labmanage.model.Team">
+    insert into team
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="ttype != null">
+        ttype,
+      </if>
+      <if test="tname != null">
+        tname,
+      </if>
+      <if test="tdate != null">
+        tdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=VARCHAR},
+      </if>
+      <if test="ttype != null">
+        #{ttype,jdbcType=VARCHAR},
+      </if>
+      <if test="tname != null">
+        #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tdate != null">
+        #{tdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzxy.labmanage.model.Team">
+    update team
+    <set>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=VARCHAR},
+      </if>
+      <if test="ttype != null">
+        ttype = #{ttype,jdbcType=VARCHAR},
+      </if>
+      <if test="tname != null">
+        tname = #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tdate != null">
+        tdate = #{tdate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzxy.labmanage.model.Team">
+    update team
+    set tid = #{tid,jdbcType=VARCHAR},
+      ttype = #{ttype,jdbcType=VARCHAR},
+      tname = #{tname,jdbcType=VARCHAR},
+      tdate = #{tdate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

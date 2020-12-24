@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzxy.labmanage.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.hzxy.labmanage.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="upassword" jdbcType="VARCHAR" property="upassword" />
+    <result column="uphone" jdbcType="VARCHAR" property="uphone" />
+    <result column="u_id_number" jdbcType="VARCHAR" property="uIdNumber" />
+    <result column="urole" jdbcType="VARCHAR" property="urole" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hzxy.labmanage.model.User">
+    <result column="umsg" jdbcType="LONGVARCHAR" property="umsg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, uname, upassword, uphone, u_id_number, urole
+  </sql>
+  <sql id="Blob_Column_List">
+    umsg
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUsername" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    where uname = #{username}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hzxy.labmanage.model.User">
+    insert into user (id, uid, uname, 
+      upassword, uphone, u_id_number, 
+      urole, umsg)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, 
+      #{upassword,jdbcType=VARCHAR}, #{uphone,jdbcType=VARCHAR}, #{uIdNumber,jdbcType=VARCHAR}, 
+      #{urole,jdbcType=VARCHAR}, #{umsg,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzxy.labmanage.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="upassword != null">
+        upassword,
+      </if>
+      <if test="uphone != null">
+        uphone,
+      </if>
+      <if test="uIdNumber != null">
+        u_id_number,
+      </if>
+      <if test="urole != null">
+        urole,
+      </if>
+      <if test="umsg != null">
+        umsg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="upassword != null">
+        #{upassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uphone != null">
+        #{uphone,jdbcType=VARCHAR},
+      </if>
+      <if test="uIdNumber != null">
+        #{uIdNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="urole != null">
+        #{urole,jdbcType=VARCHAR},
+      </if>
+      <if test="umsg != null">
+        #{umsg,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzxy.labmanage.model.User">
+    update user
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null">
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="upassword != null">
+        upassword = #{upassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uphone != null">
+        uphone = #{uphone,jdbcType=VARCHAR},
+      </if>
+      <if test="uIdNumber != null">
+        u_id_number = #{uIdNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="urole != null">
+        urole = #{urole,jdbcType=VARCHAR},
+      </if>
+      <if test="umsg != null">
+        umsg = #{umsg,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hzxy.labmanage.model.User">
+    update user
+    set uid = #{uid,jdbcType=VARCHAR},
+      uname = #{uname,jdbcType=VARCHAR},
+      upassword = #{upassword,jdbcType=VARCHAR},
+      uphone = #{uphone,jdbcType=VARCHAR},
+      u_id_number = #{uIdNumber,jdbcType=VARCHAR},
+      urole = #{urole,jdbcType=VARCHAR},
+      umsg = #{umsg,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzxy.labmanage.model.User">
+    update user
+    set uid = #{uid,jdbcType=VARCHAR},
+      uname = #{uname,jdbcType=VARCHAR},
+      upassword = #{upassword,jdbcType=VARCHAR},
+      uphone = #{uphone,jdbcType=VARCHAR},
+      u_id_number = #{uIdNumber,jdbcType=VARCHAR},
+      urole = #{urole,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzxy.labmanage.dao.UserTeamMapper">
+  <resultMap id="BaseResultMap" type="com.hzxy.labmanage.model.UserTeam">
+    <id column="tid" jdbcType="VARCHAR" property="tid" />
+    <id column="uid" jdbcType="VARCHAR" property="uid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from user_team
+    where tid = #{tid,jdbcType=VARCHAR}
+      and uid = #{uid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hzxy.labmanage.model.UserTeam">
+    insert into user_team (tid, uid)
+    values (#{tid,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzxy.labmanage.model.UserTeam">
+    insert into user_team
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        #{tid,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
